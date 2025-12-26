@@ -1,47 +1,78 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Smart Local Services Finder</ion-title>
+    <ion-title>Smart Local Services</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   <div class="intro">
-    <h2>Find nearby essential services</h2>
+    <h2>Find Nearby Services</h2>
     <p>Select a service to view nearby locations</p>
   </div>
 
-  <!-- SERVICES LIST -->
-  <ion-list inset>
-    <ion-item button (click)="findNearbyService('cafes')">
-      ☕ Cafés
-    </ion-item>
+  <!-- SERVICES GRID -->
+  <ion-grid class="service-grid">
+    <ion-row>
+      <ion-col size="6">
+        <div class="service-tile cafe" (click)="findNearbyService('cafes')">
+          <ion-icon name="cafe-outline"></ion-icon>
+          <span>Cafés</span>
+        </div>
+      </ion-col>
 
-    <ion-item button (click)="findNearbyService('pharmacies')">
-      💊 Pharmacies
-    </ion-item>
+      <ion-col size="6">
+        <div class="service-tile pharmacy" (click)="findNearbyService('pharmacies')">
+          <ion-icon name="medkit-outline"></ion-icon>
+          <span>Pharmacies</span>
+        </div>
+      </ion-col>
+    </ion-row>
 
-    <ion-item button (click)="findNearbyService('hospitals')">
-      🏥 Hospitals
-    </ion-item>
+    <ion-row>
+      <ion-col size="6">
+        <div class="service-tile hospital" (click)="findNearbyService('hospitals')">
+          <ion-icon name="medical-outline"></ion-icon>
+          <span>Hospitals</span>
+        </div>
+      </ion-col>
 
-    <ion-item button (click)="findNearbyService('atms')">
-      🏧 ATMs
-    </ion-item>
-  </ion-list>
+      <ion-col size="6">
+        <div class="service-tile atm" (click)="findNearbyService('atms')">
+          <ion-icon name="card-outline"></ion-icon>
+          <span>ATMs</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <!-- CAMERA -->
-  <ion-button expand="block" color="medium" (click)="takePhoto()">
-    📸 Take Photo
-  </ion-button>
+  <ion-card>
+    <ion-card-content>
+      <ion-button expand="block" color="medium" (click)="takePhoto()">
+        <ion-icon name="camera-outline" slot="start"></ion-icon>
+        Take Photo
+      </ion-button>
 
-  <ion-card *ngIf="photo">
-    <img [src]="photo" />
+      <ion-card *ngIf="photo" class="photo-card">
+        <img [src]="photo" alt="Captured photo" />
+      </ion-card>
+    </ion-card-content>
   </ion-card>
 
+
   <!-- EMERGENCY -->
-  <ion-button expand="block" color="danger" (click)="triggerEmergency()">
-    🚨 Emergency Alert
-  </ion-button>
+  <ion-card color="danger">
+    <ion-card-content>
+      <ion-button
+        expand="block"
+        color="light"
+        (click)="triggerEmergency()"
+      >
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        Need Help? Call Support
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
