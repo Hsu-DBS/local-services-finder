@@ -1,0 +1,7 @@
+{
+  "name": "smart-local-services-finder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
