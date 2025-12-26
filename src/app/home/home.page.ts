@@ -3,6 +3,8 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
+
 
 @Component({
   selector: 'app-home',
@@ -19,33 +21,41 @@ export class HomePage {
 
   async findNearbyService(service: string) {
     try {
-      // 1. Request permission explicitly
-      const permission = await Geolocation.requestPermissions();
 
-      if (permission.location !== 'granted') {
-        alert('Location permission is required to find nearby services.');
+      // ✅ BROWSER MODE
+      if (!('Capacitor' in window)) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            const url = `https://www.google.com/maps/search/${service}/@${lat},${lng},15z`;
+            window.open(url, '_blank');
+          },
+          (error) => {
+            console.error(error);
+            alert('Browser location access failed.');
+          }
+        );
         return;
       }
 
-      // 2. Get current position
+      // ✅ MOBILE MODE (Android / iOS)
       const position = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
-        timeout: 10000,
       });
 
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
 
-      // 3. Open Google Maps
       const url = `https://www.google.com/maps/search/${service}/@${lat},${lng},15z`;
       window.open(url, '_blank');
 
     } catch (error) {
       console.error(error);
-      alert('Unable to get location. Please check GPS settings.');
+      alert('Unable to get location.');
     }
   }
-
 
   async takePhoto() {
     try {
@@ -61,5 +71,10 @@ export class HomePage {
     } catch (error) {
       console.error('Camera error', error);
     }
+  }
+
+  async triggerEmergency() {
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+    alert('Emergency alert activated!');
   }
 }
