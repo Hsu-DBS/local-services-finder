@@ -42,6 +42,14 @@
     </ion-row>
   </ion-grid>
 
+  <ion-button expand="block" color="tertiary" (click)="takePhoto()">
+    📸 Take Photo
+  </ion-button>
+
+  <ion-card *ngIf="photo">
+    <img [src]="photo" />
+  </ion-card>
+
   <ion-button
     expand="block"
     color="danger"
