@@ -1,48 +1,37 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Smart Local Services Finder
-    </ion-title>
+    <ion-title>Smart Local Services Finder</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <h2 class="welcome-text">
-    Find nearby essential services
-  </h2>
+  <div class="intro">
+    <h2>Find nearby essential services</h2>
+    <p>Select a service to view nearby locations</p>
+  </div>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" color="secondary" (click)="findNearbyService('cafes')">
-          ☕ CAFÉS
-        </ion-button>
-      </ion-col>
+  <!-- SERVICES LIST -->
+  <ion-list inset>
+    <ion-item button (click)="findNearbyService('cafes')">
+      ☕ Cafés
+    </ion-item>
 
-      <ion-col size="6">
-        <ion-button expand="block" color="secondary" (click)="findNearbyService('pharmacies')">
-          💊 PHARMACIES
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-item button (click)="findNearbyService('pharmacies')">
+      💊 Pharmacies
+    </ion-item>
 
-    <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" color="secondary" (click)="findNearbyService('hospitals')">
-          🏥 HOSPITALS
-        </ion-button>
-      </ion-col>
+    <ion-item button (click)="findNearbyService('hospitals')">
+      🏥 Hospitals
+    </ion-item>
 
-      <ion-col size="6">
-        <ion-button expand="block" color="secondary" (click)="findNearbyService('atms')">
-          🏧 ATMS
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-item button (click)="findNearbyService('atms')">
+      🏧 ATMs
+    </ion-item>
+  </ion-list>
 
-  <ion-button expand="block" color="tertiary" (click)="takePhoto()">
+  <!-- CAMERA -->
+  <ion-button expand="block" color="medium" (click)="takePhoto()">
     📸 Take Photo
   </ion-button>
 
@@ -50,14 +39,9 @@
     <img [src]="photo" />
   </ion-card>
 
-  <ion-button
-    expand="block"
-    color="danger"
-    class="emergency-btn"
-    (click)="triggerEmergency()"
-  >
-    🚨 EMERGENCY ALERT
+  <!-- EMERGENCY -->
+  <ion-button expand="block" color="danger" (click)="triggerEmergency()">
+    🚨 Emergency Alert
   </ion-button>
-
 
 </ion-content>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
-
 
 @Component({
   selector: 'app-home',
@@ -19,30 +19,12 @@ export class HomePage {
 
   constructor() {}
 
+  // GEOLOCATION
   async findNearbyService(service: string) {
     try {
-
-      // ✅ BROWSER MODE
-      if (!('Capacitor' in window)) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-
-            const url = `https://www.google.com/maps/search/${service}/@${lat},${lng},15z`;
-            window.open(url, '_blank');
-          },
-          (error) => {
-            console.error(error);
-            alert('Browser location access failed.');
-          }
-        );
-        return;
-      }
-
-      // ✅ MOBILE MODE (Android / iOS)
       const position = await Geolocation.getCurrentPosition({
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
+        timeout: 15000,
       });
 
       const lat = position.coords.latitude;
@@ -52,11 +34,12 @@ export class HomePage {
       window.open(url, '_blank');
 
     } catch (error) {
+      alert('Unable to get location. Please enable GPS.');
       console.error(error);
-      alert('Unable to get location.');
     }
   }
 
+  // CAMERA
   async takePhoto() {
     try {
       const image = await Camera.getPhoto({
@@ -73,8 +56,18 @@ export class HomePage {
     }
   }
 
+  // EMERGENCY ALERT (HAPTICS)
   async triggerEmergency() {
-    await Haptics.impact({ style: ImpactStyle.Heavy });
-    alert('Emergency alert activated!');
+    try {
+      await Haptics.impact({
+        style: ImpactStyle.Heavy,
+      });
+
+      // Visual confirmation (VERY IMPORTANT for emulator)
+      alert('🚨 Emergency alert activated!');
+
+    } catch (error) {
+      console.error('Haptics error', error);
+    }
   }
 }

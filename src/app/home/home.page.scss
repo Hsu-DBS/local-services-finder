@@ -1,21 +1,26 @@
-.welcome-text {
+ion-content {
+  --background: #f4f6f8;
+}
+
+.intro {
   text-align: center;
-  margin-bottom: 20px;
-  font-weight: 600;
+  margin: 16px 0;
+
+  h2 {
+    font-weight: 600;
+  }
+
+  p {
+    color: #666;
+    font-size: 14px;
+  }
 }
 
-ion-button {
-  height: 60px;
+ion-item {
   font-size: 16px;
-}
-
-.emergency-btn {
-  margin-top: 30px;
-  height: 65px;
-  font-size: 18px;
 }
 
 ion-card img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
 }
