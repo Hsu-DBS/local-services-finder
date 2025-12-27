@@ -179,76 +179,10 @@ export class HomePage {
     }
   }
 
-  async triggerEmergency() {
-    console.log('🚨 Emergency button clicked!');
-    
-    try {
-      console.log('Attempting haptics...');
-      await Haptics.impact({ style: ImpactStyle.Heavy });
-      console.log('Haptics done');
-    } catch (e) {
-      console.log('Haptics not available:', e);
-    }
-
-    console.log('Creating alert...');
-    
-    try {
-      const emergencyAlert = await this.alertController.create({
-        header: 'Need Help?',
-        message: 'Choose an option:',
-        buttons: [
-          {
-            text: 'Contact Hotel',
-            handler: () => {
-              console.log('Contact Hotel clicked');
-              this.contactHotel();
-            }
-          },
-          {
-            text: 'Find Hospital',
-            handler: () => {
-              console.log('Find Hospital clicked');
-              this.findNearbyService('hospitals');
-            }
-          },
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancelled');
-            }
-          }
-        ]
-      });
-      
-      console.log('Alert created, presenting...');
-      await emergencyAlert.present();
-      console.log('Alert presented');
-      
-    } catch (error) {
-      console.error('Error creating alert:', error);
-    }
+  callHelp() {
+    Haptics.impact({ style: ImpactStyle.Heavy });
+    window.location.href = 'tel:+353800000000';
   }
 
-  async contactHotel() {
-    const alert = await this.alertController.create({
-      header: 'Need Help?',
-      message: 'Would you like to call the hotel?\n\nPhone: +353-1-555-0100\n',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Call',
-          handler: () => {
-            window.location.href = 'tel:+35312345678';
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
 
 }
