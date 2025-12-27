@@ -1,27 +1,51 @@
+<!--
+REFERENCES:
+Ionic UI Components: https://ionicframework.com/docs/components
+Ionic Grid System: https://ionicframework.com/docs/layout/grid
+Ionic Icons: https://ionic.io/ionicons
+Angular Event Binding: https://angular.io/guide/event-binding
+-->
+
+<!-- APP HEADER -->
+<!-- ion-header creates a fixed header at the top of the page -->
 <ion-header>
+  <!-- ion-toolbar is used to place title and buttons inside the header -->
   <ion-toolbar color="primary">
+    <!-- ion-title displays the app title -->
     <ion-title>Smart Local Services</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- MAIN CONTENT AREA -->
+<!-- ion-content holds all scrollable page content -->
 <ion-content class="ion-padding">
 
+  <!-- INTRO SECTION -->
+  <!-- Simple introduction text for users -->
   <div class="intro">
     <h2>Find Nearby Services</h2>
     <p>Select a service to view nearby locations</p>
   </div>
 
   <!-- SERVICES GRID -->
+  <!-- ion-grid is used to create a responsive layout -->
   <ion-grid class="service-grid">
+
+    <!-- FIRST ROW -->
     <ion-row>
+      <!-- ion-col defines a column (6 = half width) -->
       <ion-col size="6">
+        <!-- Service tile for Cafés -->
+        <!-- (click) triggers Angular method when tapped -->
         <div class="service-tile cafe" (click)="findNearbyService('cafes')">
+          <!-- Ionicon for café -->
           <ion-icon name="cafe-outline"></ion-icon>
           <span>Cafés</span>
         </div>
       </ion-col>
 
       <ion-col size="6">
+        <!-- Service tile for Pharmacies -->
         <div class="service-tile pharmacy" (click)="findNearbyService('pharmacies')">
           <ion-icon name="medkit-outline"></ion-icon>
           <span>Pharmacies</span>
@@ -29,8 +53,10 @@
       </ion-col>
     </ion-row>
 
+    <!-- SECOND ROW -->
     <ion-row>
       <ion-col size="6">
+        <!-- Service tile for Hospitals -->
         <div class="service-tile hospital" (click)="findNearbyService('hospitals')">
           <ion-icon name="medical-outline"></ion-icon>
           <span>Hospitals</span>
@@ -38,6 +64,7 @@
       </ion-col>
 
       <ion-col size="6">
+        <!-- Service tile for ATMs -->
         <div class="service-tile atm" (click)="findNearbyService('atms')">
           <ion-icon name="card-outline"></ion-icon>
           <span>ATMs</span>
@@ -46,24 +73,34 @@
     </ion-row>
   </ion-grid>
 
-  <!-- CAMERA -->
+  <!-- CAMERA SECTION -->
+  <!-- ion-card groups camera-related UI -->
   <ion-card>
     <ion-card-content>
+
+      <!-- Button to open device camera -->
+      <!-- Calls takePhoto() method -->
       <ion-button expand="block" color="medium" (click)="takePhoto()">
         <ion-icon name="camera-outline" slot="start"></ion-icon>
         Take Photo
       </ion-button>
 
+      <!-- Display captured photo only if photo exists -->
+      <!-- *ngIf is an Angular structural directive -->
       <ion-card *ngIf="photo" class="photo-card">
         <img [src]="photo" alt="Captured photo" />
       </ion-card>
+
     </ion-card-content>
   </ion-card>
 
-
-  <!-- EMERGENCY -->
+  <!-- EMERGENCY SECTION -->
+  <!-- Red card to highlight emergency functionality -->
   <ion-card color="danger">
     <ion-card-content>
+
+      <!-- Emergency call button -->
+      <!-- Triggers callHelp() function -->
       <ion-button
         expand="block"
         color="light"
@@ -72,6 +109,7 @@
         <ion-icon name="call-outline" slot="start"></ion-icon>
         Need Help? Call Support
       </ion-button>
+
     </ion-card-content>
   </ion-card>
 

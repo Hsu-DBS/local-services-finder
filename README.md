@@ -52,7 +52,7 @@ Users can locate nearby essential services including:
 - Hospitals
 - ATMs
 
-The application retrieves the user’s current location and opens Google Maps to display nearby services based on the selected category.
+The application retrieves the user’s current location and opens Google Maps to display nearby services based on the selected category. Depending on network connectivity and device performance, there may be a short delay while Google Maps loads.
 
 **Plugin used:** Capacitor Geolocation  
 
