@@ -39,6 +39,8 @@ import {
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Network } from '@capacitor/network';
+import { Toast } from '@capacitor/toast';
 
 // Import Ionicons utilities
 import { addIcons } from 'ionicons';
@@ -112,6 +114,16 @@ export class HomePage {
   // Find nearby services using device location
   async findNearbyService(service: string) {
     try {
+      const status = await Network.getStatus();
+
+      if (!status.connected) {
+        await this.showAlert(
+          'No Internet Connection',
+          'Please connect to the internet to search nearby services.'
+        );
+        return;
+      }
+
       console.log('Starting location request...');
 
       // Check location permission status
@@ -160,6 +172,12 @@ export class HomePage {
         'Success',
         `Location found: ${lat.toFixed(4)}, ${lng.toFixed(4)}`
       );
+
+      await Toast.show({
+        text: 'Location detected successfully',
+        duration: 'short',
+        position: 'bottom'
+      });
 
     } catch (error: any) {
       console.error('Location error:', error);
@@ -218,6 +236,13 @@ export class HomePage {
       this.photo = image.dataUrl ?? null;
       console.log('Photo captured successfully');
 
+      //success feedback
+      await Toast.show({
+        text: 'Photo captured successfully',
+        duration: 'short',
+        position: 'bottom'
+      });
+
     } catch (error: any) {
       console.error('Camera error:', error);
 
@@ -232,9 +257,16 @@ export class HomePage {
   }
 
   // Emergency call with haptic feedback
-  callHelp() {
+  async callHelp() {
     // Trigger vibration feedback
-    Haptics.impact({ style: ImpactStyle.Heavy });
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+
+    // Show toast feedback
+    await Toast.show({
+      text: 'Calling emergency support...',
+      duration: 'short',
+      position: 'center'
+    });
 
     // Open phone dialer
     window.location.href = 'tel:+353800000000';
