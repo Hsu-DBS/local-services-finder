@@ -147,23 +147,24 @@ These features provide a professional and platform-appropriate appearance.
 
 ## Project Structure
 
+```
 smart-local-services-finder/
 ├── src/
-│ ├── app/
-│ │ └── home/
-│ │ ├── home.page.html
-│ │ ├── home.page.scss
-│ │ └── home.page.ts
-│ ├── assets/
-│ └── theme/
+│   ├── app/
+│   │   └── home/
+│   │       ├── home.page.html
+│   │       ├── home.page.scss
+│   │       └── home.page.ts
+│   ├── assets/
+│   └── theme/
 ├── android/
 ├── resources/
-│ ├── icon.png
-│ └── splash.png
+│   ├── icon.png
+│   └── splash.png
 ├── capacitor.config.ts
 ├── package.json
 └── README.md
-
+```
 
 ---
 
