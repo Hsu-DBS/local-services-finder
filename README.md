@@ -65,7 +65,7 @@ Users can locate nearby essential services including:
 - ATMs
 
 The application retrieves the user’s current location and opens **Google Maps** to display nearby services based on the selected category.  
-When running on the **Android Emulator**, Google Maps may take approximately **10 seconds to load**, which is a known emulator performance limitation.  
+When running on the **Android Emulator**, Google Maps may take approximately **5 seconds to load**, which is a known emulator performance limitation.  
 A network connectivity check is performed before opening Google Maps to improve reliability.
 
 **Plugins used:**  
